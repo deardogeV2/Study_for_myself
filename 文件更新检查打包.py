@@ -199,6 +199,20 @@ def log_creater(name,msg,Path):
     file=open(full_path,'w')#写文件
     file.write(msg)
     file.close()#关闭文件
+
+#根据当前时间，变更打包名字。
+def time_get_for_zip():
+    ticks=time.time()
+    tt=time.localtime(ticks)
+    a=str(tt.tm_year)
+    b=str(tt.tm_mon)
+    if tt.tm_mon<10:
+        b='0'+str(tt.tm_mon)
+    c=str(tt.tm_mday)
+    if tt.tm_mday<10:
+        c='0'+str(tt.tm_mday)
+    out_time=a+b+c
+    return out_time
 #=========================================================================
 #主程序位置
 
@@ -210,7 +224,7 @@ log_creater(log_name,log_msg,PAG_PATH)#添加日志文件
 if not os.listdir(PAG_PATH):#文件夹判断是否为空
     print("打包文件夹为空，本地文件没有更新")
 else:
-    zip_file(PAG_PATH,'20200730')
+    zip_file(PAG_PATH,time_get_for_zip())
     print("更新文件数为："+str(ChangeFiles))
     print("请注意！这里的更新文件数包含.git仓库信息文件更新，")
     print("具体的更新请看项目路径！！！")
