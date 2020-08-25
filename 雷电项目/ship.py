@@ -1,5 +1,7 @@
 import pygame
-class Ship():
+from pygame.sprite import Sprite
+
+class Ship(Sprite):
     def __init__(self,ai_settings,screen):#初始位置
         self.screen=screen
         #移动标志
@@ -15,7 +17,9 @@ class Ship():
         self.ai_settings=ai_settings
         #center存储小数据设置，同时赋予初始位置
         self.centerx = float(self.screen_rect.centerx)
-        self.centery = float(self.screen_rect.bottom-self.rect.bottom/2)
+        self.centery = float(self.screen_rect.bottom-self.rect.height/2)
+
+        super(Ship,self).__init__()
 
     def blitme(self):
         self.screen.blit(self.image,self.rect)
@@ -31,8 +35,13 @@ class Ship():
         if self.moving_down and self.rect.bottom<self.screen_rect.bottom:
             self.centery +=self.ai_settings.ship_speed_factor
 
-
-
         #根据新位置更新船体实际位置
         self.rect.centerx=self.centerx
         self.rect.centery=self.centery
+
+    #飞船在屏幕上居中
+    def center_ship(self):
+        self.centerx = float(self.screen_rect.centerx)
+        self.centery = float(self.screen_rect.bottom-self.rect.height/2)
+
+
