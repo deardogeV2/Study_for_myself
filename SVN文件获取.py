@@ -8,30 +8,28 @@ import subprocess
 import requests
 import shutil
 
-PP=r'''trunk\issue\互联网医院\202007\video_server\db_im_inquiry.sql
-trunk\issue\互联网医院\202007\video_server\db_sys.sql
-trunk\issue\互联网医院\202007\video_server\doctor_platfrom.zip
-trunk\issue\互联网医院\202007\video_server\hsol_admin.zip
-trunk\issue\互联网医院\202007\video_server\hsol_api.zip
-trunk\issue\互联网医院\202007\video_server\hsol_doctor.zip
-trunk\issue\互联网医院\202007\video_server\vi_api.zip
-trunk\issue\互联网医院\202007\video_server\vi_websocket.zip
-trunk\issue\互联网医院\202007\video_server\WebAPI.zip'''
+PP=r'''trunk\issue\贵健康\server\2020\08\24\MsgInquiryServer.zip
+trunk\issue\贵健康\server\2020\08\24\WebSocketServer.zip'''
 
 Top="D:\\SVN_zb\\"
+OUT_PATH=r'C:\Users\Administrator\Desktop\SVN更新文件'
 #暂时使用环境
 SVN_path=[]#svn更新文件目录,r为绝对路径输入
+
+def clear_path(path):
+    shutil.rmtree(path)
+    os.mkdir(path)
 
 def qiepian(PP):
     global SVN_path
     p = 0
     q = 0
-    time = 0
     for t in PP:
-        if t == '\n':
+        if t == '\n' :
             SVN_path.append(Top+PP[q:p])
-            time += 1
             q = p+1
+        if p+1==len(PP):
+            SVN_path.append(Top+PP[q:p+1])
         p += 1
 
 
@@ -61,8 +59,9 @@ def fuzhi(SVN_path):
         # 更新结束
         print('更新结束')
         # 放到桌面文件夹
-        shutil.copy(path, r'''C:\Users\Administrator\Desktop\SVN更新文件''')
+        shutil.copy(path, OUT_PATH)
 
+#主程序部分
+clear_path(OUT_PATH)
 qiepian(PP)
-
 fuzhi(SVN_path)
