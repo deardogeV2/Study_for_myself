@@ -4,12 +4,11 @@
 #
 #导入模块
 import os
-import subprocess
-import requests
 import shutil
 
-PP=r'''trunk\issue\贵健康\server\2020\08\24\MsgInquiryServer.zip
-trunk\issue\贵健康\server\2020\08\24\WebSocketServer.zip'''
+PP=r'''trunk\issue\互联网医院\202008\26\doctor_platfrom_20200625.zip
+trunk\issue\互联网医院\202008\26\db_video_inquiry.sql
+trunk\issue\互联网医院\202008\26\wechat_20200826_2.zip'''
 
 Top="D:\\SVN_zb\\"
 OUT_PATH=r'C:\Users\Administrator\Desktop\SVN更新文件'
@@ -31,7 +30,6 @@ def qiepian(PP):
         if p+1==len(PP):
             SVN_path.append(Top+PP[q:p+1])
         p += 1
-
 
 def fuzhi(SVN_path):
     for path in SVN_path:
