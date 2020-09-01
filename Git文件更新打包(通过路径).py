@@ -3,10 +3,9 @@ PPAP='''文件更新检查打包.py
 创作者：ZB
 更新时间：2020/8/26
 使用注意：代码目前实现了自动更新GIT然后按照目录查找文件进行打包。
-注意：目前需要自己删除上次的打包记录'''
-
-SOUR_PATH=r'''vi_api\app\Http\Lib\AppIdManager.php
-vi_api\app\Http\Lib\ConstUtil.php'''
+注意：如果出问题，可以把Git获取文件夹里面的文件给清除一哈。'''
+SOUR_PATH=r'''vi_api\.env
+vi_api\.env.debug'''
 #=========================================================================
 #库文件定义
 import os
@@ -57,7 +56,7 @@ ChangeFiles = 0 #用于记录本次运行更新的文件数量
 def get():
     print("请问分支是什么？")
     Q = input("Y/N(Y以外都为不更换，默认为Mater分支):")
-    if Q == "Y" or Q == "y":
+    if Q.lower()=='q':
         CHECKOUT = input("请输入分支名字:")  # 切换分支
         try:
             repo = Git(O_PATH)  # 定义Git仓库地址
@@ -100,16 +99,13 @@ def qiepian_pag(PP):
         p += 1
 #单个文件的目录获取
 def mulu_get(path):
-    p=-1
-    q=len(path)
-    str=''
-    while q+p>0:
-        if path[q+p]=='\\':
-            str=path[0:q+p+1]
-            break
-        else:
-            p-=1
+    str=os.path.split(path)[0]
     return str
+
+#检查文件夹是否为空
+def clear_path(path):
+    shutil.rmtree(path)
+    os.mkdir(path)
 
 #获取PAG目录地址
 def mulu(P):
@@ -151,8 +147,10 @@ GIT_PATH=[]
 PAG_PATH=[]
 MULU_PATH=[]
 PAG=[]
-#开始代码拉取
+#清空文件夹（清除文件夹重新建立
+clear_path(PAGPATH)
 
+#开始代码拉取
 Git_Top()
 qiepian_git(SOUR_PATH)
 qiepian_pag(SOUR_PATH)
