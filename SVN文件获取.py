@@ -6,9 +6,7 @@
 import os
 import shutil
 
-PP=r'''trunk\issue\互联网医院\202008\26\doctor_platfrom_20200625.zip
-trunk\issue\互联网医院\202008\26\db_video_inquiry.sql
-trunk\issue\互联网医院\202008\26\wechat_20200826_2.zip'''
+PP=r'''trunk\issue\互联网医院\202008\31\vi_websocket_20200831.zip'''
 
 Top="D:\\SVN_zb\\"
 OUT_PATH=r'C:\Users\Administrator\Desktop\SVN更新文件'
@@ -20,7 +18,6 @@ def clear_path(path):
     os.mkdir(path)
 
 def qiepian(PP):
-    global SVN_path
     p = 0
     q = 0
     for t in PP:
@@ -34,15 +31,8 @@ def qiepian(PP):
 def fuzhi(SVN_path):
     for path in SVN_path:
         # 文件名-路径获取
-        length = len(path)
-        i = length
-        while i > 0:
-            i -= 1
-            if path[i] == '\\':
-                break
-
-        FileName = path[i + 1:length]
-        Path = path[0:i]
+        FileName = os.path.split(path)[1]
+        Path = os.path.split(path)[0]
 
         print("文件名:" + FileName)
         print("路径:" + Path)
