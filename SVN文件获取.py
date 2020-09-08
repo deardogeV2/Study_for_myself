@@ -1,7 +1,10 @@
 #文件信息
-#暂时先做一个从svn上面自动更新和自动获得文件的脚本
-#制作人：周彪
-#
+PPAP='''
+作者：ZB
+更新时间：2020/9/8
+使用注意：配置PP（邮件路径），Top（SVN本地仓库根目录），OUT_PATH（输出目录）
+其他：自动更新打包，出现问题可能是清除代码clear被拒绝或者是邮件路径给错了。
+'''
 #导入模块
 import os
 import shutil
@@ -18,15 +21,10 @@ def clear_path(path):
     os.mkdir(path)
 
 def qiepian(PP):
-    p = 0
-    q = 0
-    for t in PP:
-        if t == '\n' :
-            SVN_path.append(Top+PP[q:p])
-            q = p+1
-        if p+1==len(PP):
-            SVN_path.append(Top+PP[q:p+1])
-        p += 1
+    a=PP.split('\n')
+    for t in a:
+        if t!='':
+            SVN_path.append(Top+t)
 
 def fuzhi(SVN_path):
     for path in SVN_path:
@@ -53,3 +51,4 @@ def fuzhi(SVN_path):
 clear_path(OUT_PATH)
 qiepian(PP)
 fuzhi(SVN_path)
+print('完成获取',PPAP,sep='\n')
