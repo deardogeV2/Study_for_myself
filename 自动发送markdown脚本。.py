@@ -6,6 +6,7 @@ import base64
 import urllib.parse
 import json
 from urllib import parse
+import re
 '''
 目前这个接口用的是钉钉的群聊机器人接口，根据接口文档所写。
 因为是公司的机器人，请大家不要使用这个机器人接口。
@@ -25,16 +26,18 @@ def json_to_markdown(json_data,err=None,errname='问题反馈'):
     #至此url解码完毕,开始进行格式规整
     out={}
     out['title']=errname
-    out['text']='#### '+errname+' @'+'电话号码:'+text['mobile']+'\n>'
+    out['text']='#### '+errname+' @'+'电话号码:'+text['mobile']+'\n'
     for i in text:
         if i !='template_args':
-            out['text']+=i+':'+text[i]+'\n\n'
+            out['text']+='>'+i+':'+text[i]+'\n\n'
         else:
             for p in text[i]:
-                out['text']+=p+':'+text['template_args'][p]+'\n\n'
+                out['text']+='>'+p+':'+text['template_args'][p]+'\n\n'
 
     if err!=None:
-        out['text']+=err
+        out['text']+='>问题点:\n\n'
+        for i in err:
+            out['text']+='>>'+i+'\n\n'
     return out
 
 jsondata = '{"app_id":"10004","client_id":"70000","mobile":"15247841251","send_status":"1","template_args":{"p1":"%E5%91%A8%E5%BD%AA%E5%BD%AA","p2":"%E8%B4%B5%E9%98%B3%E5%B8%82%E5%8F%A3%E8%85%94%E5%8C%BB%E9%99%A2","p3":"%E5%8F%A3%E8%85%94%E4%BF%AE%E5%A4%8D%E7%A7%91","p4":"%E5%BC%A0%E7%BF%8A","p5_1":"2020%E5%B9%B4","p5_2":"09%E6%9C%8828%E6%97%A5","p5_3":"","p5_4":"%E5%91%A8%E4%B8%80","p5_5":"%E4%B8%8A%E5%8D%88","p12":"2","p_title":"%E5%8F%96%E6%B6%88%E6%8C%82%E5%8F%B7"},"template_id":"1186"}'
@@ -58,8 +61,8 @@ ERR='''
     </body>^M
 <ml>
 '''
-ERR.replace('\n','\n\n')
-out=json_to_markdown(jsondata,err=ERR,errname='问题')
+ERR_data=re.findall(r'<\w+>(.+)</\w+>',ERR)
+out=json_to_markdown(jsondata,err=ERR_data,errname='问题')
 
 '''
 这里是断层，上面是将json形式字符串变成钉钉需求的markdown格式
@@ -90,4 +93,4 @@ def fasong(json):
 
 fasong(out)
 
-
+print(ERR_data)
