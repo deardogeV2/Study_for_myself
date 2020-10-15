@@ -9,7 +9,11 @@ PPAP='''
 import os
 import shutil
 
-PP=r'''trunk\issue\互联网医院\202008\31\vi_websocket_20200831.zip'''
+
+PP=r'''trunk\issue\互联网医院\202009\29\db_physicial_examination.sql
+trunk\issue\互联网医院\202009\29\sso_20200929.zip
+trunk\issue\互联网医院\202009\29\timingTask_20200929.zip
+trunk\issue\互联网医院\202009\29\WebAPI.zip'''
 
 Top="D:\\SVN_zb\\"
 OUT_PATH=r'C:\Users\Administrator\Desktop\SVN更新文件'
@@ -51,4 +55,4 @@ def fuzhi(SVN_path):
 clear_path(OUT_PATH)
 qiepian(PP)
 fuzhi(SVN_path)
-print('完成获取',PPAP,sep='\n')
+print('完成获取',f'更新文件共;{len(SVN_path)}个。',PPAP,sep='\n')

@@ -47,7 +47,7 @@ DROP TABLE IF EXISTS `表明`（也可以是`库`.`表明`）
 5.重命名:RENAME
 RENAME TABLE `老名字` TO `新名字`
 
-6.修改表结构（重要）：ALTER的使用就是在已有表中进行怎删改查
+6.修改表结构（重要）：ALTER的使用就是在已有表中进行增删改
 ALTER TABLE `表名` ADD(DROP,CHANGE选一个)
 如：
 (1)添加列

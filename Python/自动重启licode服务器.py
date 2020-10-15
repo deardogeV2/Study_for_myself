@@ -28,9 +28,6 @@ time.sleep(0.1)
 shell.send('v$WL7Bq5@OkxRjc\n')
 time.sleep(0.1)
 
-shell.send('cd /server/licode \n')
-time.sleep(0.1)
-
 shell.send('ps -ef |grep node \n')
 time.sleep(0.1)
 buff=''
@@ -47,7 +44,10 @@ if 'erizoserver.js' in buff or 'erizoAgent.js' in buff:#单独查找
     print('程序正在运行')
     sys.exit(0)
 else:
+    time.sleep(0.1)
     print('程序没有在运行，开始重启')
+    time.sleep(0.1)
+    shell.send('cd /server/licode \n')
     time.sleep(0.1)
     shell.send('./scripts/starterizoerver.sh \n')
     time.sleep(0.1)
