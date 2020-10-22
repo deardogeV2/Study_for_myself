@@ -1,4 +1,13 @@
 <?php
+/*
+使用时需要注意：
+1.windows中使用PHP里面的system等方式使用cmd来执行的时候需要注意cmd的双引号转义的问题，
+比如三个双引号在CMD中就是一个双引号
+
+2.PHP中的PHP_EOL换行常量在别的代码中运行时候存在问题，这里直接换成“\n”会好一些
+
+
+*/
 function request_by_curl($remote_server, $post_string)
 {
     $ch = curl_init();
@@ -46,9 +55,14 @@ function getdata($par,$errMobiles){
 
 function auto_markdown_run($title, $par,$errMobiles)
 {
+    var_dump($title);
+    var_dump($par);
+    var_dump($errMobiles);
 
     $msg=json_decode($par,true);
     $err=json_decode($errMobiles,true);
+
+    echo "\n";
     var_dump($msg);
     var_dump($err);
 
@@ -58,7 +72,7 @@ function auto_markdown_run($title, $par,$errMobiles)
     list($msec, $sec) = explode(' ', microtime());
     $msectime = (float)sprintf('%.0f', (floatval($msec) + floatval($sec)) * 1000);
     $secret = 'SEC63b8487cc0b3d0ebf5b39e68c17b996f3aedc005efa86878d80b311d5cf204bf';
-    $sign = urlencode(base64_encode(hash_hmac('sha256', $msectime . PHP_EOL . $secret, $secret, true)));
+    $sign = urlencode(base64_encode(hash_hmac('sha256', $msectime . "\n" . $secret, $secret, true)));
     $webhook = "https://oapi.dingtalk.com/robot/send?access_token=284397cd7ac0a0ab6dc522fe1492b640f35ca8be6c3b9753452a8040d29f55ab" . "&" . "timestamp=" . $msectime . "&sign=" . $sign;
 
 // 数据内容
@@ -69,19 +83,15 @@ function auto_markdown_run($title, $par,$errMobiles)
             "text" => $text
         ],
         'at' => [
-
-            'atMobiles' => [
-                "156xxxx8827",
-                "189xxxx8325"
-            ],
-            'isAtAll' => false
-
+            'isAtAll' => true
         ]
     ]);
     var_dump(request_by_curl($webhook, $textString));
 }
 
 auto_markdown_run($argv[1],$argv[2],$argv[3]);
+
+
 
 die;
 ///usr/local/lnmp/php/bin/php test.php 'super' '{"p1":"123","p2":{"p21":"321"}}' '{"res":'1234'}'
