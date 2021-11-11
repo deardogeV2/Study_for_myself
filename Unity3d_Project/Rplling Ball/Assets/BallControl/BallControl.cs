@@ -31,8 +31,6 @@ public class BallControl : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
-        Debug.Log("水平：" + h + "垂直：" + v);
-
         rig.AddForce(new Vector3(h, 0, v) * speed * 5);
     }
 }
