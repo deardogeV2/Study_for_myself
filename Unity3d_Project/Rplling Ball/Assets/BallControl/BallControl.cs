@@ -8,6 +8,7 @@ public class BallControl : MonoBehaviour
 
     public float speed = 3; // 定义速度参数，同时可以在unity里面看到
     public int all_scorce = 0;
+    private bool is_alive = true;
 
     // Start is called before the first frame update
     void Start()
@@ -29,8 +30,14 @@ public class BallControl : MonoBehaviour
 
     private void FixedUpdate()
     {
+
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            rig.AddForce(Vector3.up * 500);
+        }
 
         rig.AddForce(new Vector3(h, 0, v) * speed * 5);
     }
@@ -38,6 +45,29 @@ public class BallControl : MonoBehaviour
     public void OnAddScore(int cur_score)
     {
         all_scorce += cur_score;
-        Debug.Log("现在人物有：" + all_scorce+ "分");
+    }
+
+    private void OnGUI()
+    {
+        GUI.Label(new Rect(0, 0, 400, 200), "现在人物有：" + all_scorce + "分");
+
+        if (!is_alive)
+        {
+            GUI.Label(new Rect((Screen.width >> 1) - 100, (Screen.height >> 1) - 100, 200, 200), "GameOver!");
+            if (GUI.Button(new Rect((Screen.width >> 1) - 100, (Screen.height >> 1), 200, 200), "Restart!"))
+            {
+                //重新开始游戏，重新加载场景
+                Application.LoadLevel("SampleScene");
+                
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("dead_area"))
+        {
+            is_alive = false;
+        }
     }
 }
