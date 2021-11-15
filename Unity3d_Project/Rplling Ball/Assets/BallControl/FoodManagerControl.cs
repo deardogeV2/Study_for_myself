@@ -13,43 +13,46 @@ public class FoodManagerControl : MonoBehaviour
 
     void Start()
     {
-        
-        for (int i = 0; i < target_foods; i++)
-        {
-            while (true)
-            {
-                int food_number = (int)Random.Range(0.1f, 2.9f);
-                foodPrefab = Resources.Load<GameObject>("FoodMode/FoodMode"+food_number);
-                bool tmp_result = true;
-                float x = Random.Range(-9.0f, 9.0f);
-                float y = 0.7f;
-                float z = Random.Range(-9.0f, 9.0f);
 
-                Vector3 new_position = new Vector3(x, y, z);
+        //for (int i = 0; i < target_foods; i++)
+        //{
+        //    while (true)
+        //    {
+        //        int food_number = (int)Random.Range(0.1f, 2.9f);
+        //        foodPrefab = Resources.Load<GameObject>("FoodMode/FoodMode"+food_number);
+        //        bool tmp_result = true;
+        //        float x = Random.Range(-9.0f, 9.0f);
+        //        float y = 0.7f;
+        //        float z = Random.Range(-9.0f, 9.0f);
 
-                foreach (GameObject oneFood in foodList)
-                {
-                    Vector3 food_position = oneFood.transform.position;
-                    Vector3 tmp = new_position - food_position;
+        //        Vector3 new_position = new Vector3(x, y, z);
 
-                    if (tmp.magnitude < position)
-                    {
-                        tmp_result = false;
-                        break;
-                    }
-                }
+        //        foreach (GameObject oneFood in foodList)
+        //        {
+        //            Vector3 food_position = oneFood.transform.position;
+        //            Vector3 tmp = new_position - food_position;
 
-                if (tmp_result)
-                {
-                    GameObject new_food = Instantiate<GameObject>(foodPrefab);
-                    new_food.transform.SetParent(this.gameObject.transform);
-                    new_food.transform.position = new Vector3(x, y, z);
-                    new_food.GetComponent<FoodControl>().speed = Random.RandomRange(20f, 50f);
-                    foodList.Add(new_food);
-                    break;
-                }
-            }
-        }
+        //            if (tmp.magnitude < position)
+        //            {
+        //                tmp_result = false;
+        //                break;
+        //            }
+        //        }
+
+        //        if (tmp_result)
+        //        {
+        //            GameObject new_food = Instantiate<GameObject>(foodPrefab);
+        //            new_food.transform.SetParent(this.gameObject.transform);
+        //            new_food.transform.position = new Vector3(x, y, z);
+        //            new_food.GetComponent<FoodControl>().speed = Random.RandomRange(20f, 50f);
+        //            foodList.Add(new_food);
+        //            break;
+        //        }
+        //    }
+        //}
+
+        //使用协程的方式，将创建食物的流程放在协程之中执行。一定程度有解耦的作用
+        StartCoroutine(CreatFoodCoroutine());
     }
 
     public void deleteFood(GameObject go)
@@ -61,40 +64,59 @@ public class FoodManagerControl : MonoBehaviour
 
     private void Update()
     {
-        if (foodList.Count < 5)
+        
+    }
+
+    IEnumerator CreatFoodCoroutine()
+    {
+        yield return null;
+        while (true)
         {
-            while (true)
+            if (foodList.Count < target_foods)
             {
-                int food_number = (int)Random.Range(0.1f, 2.9f);
-                foodPrefab = Resources.Load<GameObject>("FoodMode/FoodMode" + food_number);
-                bool tmp_result = true;
-                float x = Random.Range(-9.0f, 9.0f);
-                float y = 0.7f;
-                float z = Random.Range(-9.0f, 9.0f);
+                CreatOneFood();
+                yield return new WaitForSeconds(0.5f);
+            }
+            else
+            {
+                yield return new WaitForEndOfFrame();
+            }
+        }
+    }
 
-                Vector3 new_position = new Vector3(x, y, z);
+    public void CreatOneFood()
+    {
+        while (true)
+        {
+            int food_number = (int)Random.Range(0.1f, 2.9f);
+            foodPrefab = Resources.Load<GameObject>("FoodMode/FoodMode" + food_number);
+            bool tmp_result = true;
+            float x = Random.Range(-9.0f, 9.0f);
+            float y = 0.7f;
+            float z = Random.Range(-9.0f, 9.0f);
 
-                foreach (GameObject oneFood in foodList)
+            Vector3 new_position = new Vector3(x, y, z);
+
+            foreach (GameObject oneFood in foodList)
+            {
+                Vector3 food_position = oneFood.transform.position;
+                Vector3 tmp = new_position - food_position;
+
+                if (tmp.magnitude < position)
                 {
-                    Vector3 food_position = oneFood.transform.position;
-                    Vector3 tmp = new_position - food_position;
-
-                    if (tmp.magnitude < position)
-                    {
-                        tmp_result = false;
-                        break;
-                    }
-                }
-
-                if (tmp_result)
-                {
-                    GameObject new_food = Instantiate<GameObject>(foodPrefab);
-                    new_food.transform.SetParent(this.gameObject.transform);
-                    new_food.transform.position = new Vector3(x, y, z);
-                    new_food.GetComponent<FoodControl>().speed = Random.RandomRange(20f, 50f);
-                    foodList.Add(new_food);
+                    tmp_result = false;
                     break;
                 }
+            }
+
+            if (tmp_result)
+            {
+                GameObject new_food = Instantiate<GameObject>(foodPrefab);
+                new_food.transform.SetParent(this.gameObject.transform);
+                new_food.transform.position = new Vector3(x, y, z);
+                new_food.GetComponent<FoodControl>().speed = Random.RandomRange(20f, 50f);
+                foodList.Add(new_food);
+                break;
             }
         }
     }
