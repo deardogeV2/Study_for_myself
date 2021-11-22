@@ -24,7 +24,6 @@ public class Player : MonoBehaviour
         {
             rig.velocity = new Vector3(h, 0, v) * speed;
 
-            transform.localRotation = Quaternion.Euler(new Vector3(transform.localRotation.x, transform.localRotation.y, transform.localRotation.z<30& transform.localRotation.z>-30? transform.localRotation.z+h: transform.localRotation.z));
         }
 
         if (h == 0f)
