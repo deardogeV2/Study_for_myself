@@ -7,6 +7,7 @@ public class CameraControl : MonoBehaviour
     // Start is called before the first frame update
     private Vector3 distance;
     public Transform ball_transform;
+    
     void Start()
     {
         GameObject PlayerBall = GameObject.FindGameObjectWithTag("Player");
@@ -19,4 +20,6 @@ public class CameraControl : MonoBehaviour
     {
         transform.position = ball_transform.position + distance;
     }
+
+    
 }
