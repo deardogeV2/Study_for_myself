@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
         {
             rig.velocity = new Vector3(h, 0, v) * speed;
 
+            transform.RotateAround(transform.position,new Vector3(0,0,1),h);
+
         }
 
         if (h == 0f)
