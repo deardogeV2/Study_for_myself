@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Map.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\Bullet.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
