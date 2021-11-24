@@ -5,7 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour
 {
-    // Start is called before the first frame update
     Rigidbody rig;
     float speed = 3f;
 
@@ -34,7 +33,7 @@ public class Player : MonoBehaviour
         if (rig)
         {
             rig.velocity = new Vector3(h, 0, v) * speed;
-
+            // 角度旋转方案之一，使用欧拉角直接进行旋转。new Vector3(0,0,-30)为常向量，h为水平轴取值（-1~1），直接相乘可以实现我们希望的左右按键水平移动的时候飞机左右在一定角度上发生旋转的方案。
             transform.eulerAngles = new Vector3(0, 0, -30) * h;
         }
 
@@ -63,8 +62,10 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //�����ӵ����󣬲��ҳ�ʼ���ӵ���λ���ڷ�����λ���ϡ�
+            // 生成子弹对象
             GameObject goBullet = Instantiate<GameObject>(prefab_bullet);
+            //将子弹对象的位置设置于开火点。（可以思考一下这样是否会有很短的一瞬间，子弹会在0，0，0位置与别的物体发生碰撞？）
+            //碰撞条件为两物体都有collider 碰撞体组件。
             goBullet.transform.position = fire_point.position;
         }
     }
