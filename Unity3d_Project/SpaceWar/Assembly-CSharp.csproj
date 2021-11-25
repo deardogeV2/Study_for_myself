@@ -53,12 +53,14 @@
     <UnityVersion>2020.3.22f1c1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Bullet.cs" />
-    <Compile Include="Assets\Scripts\Map.cs" />
-    <Compile Include="Assets\Scripts\Player.cs" />
-    <Compile Include="Assets\Scripts\GameZoom.cs" />
-    <Compile Include="Assets\Scripts\Stone.cs" />
+    <Compile Include="Assets\Scripts\PlayerBullet.cs" />
     <Compile Include="Assets\Scripts\StoneManager.cs" />
+    <Compile Include="Assets\Scripts\Map.cs" />
+    <Compile Include="Assets\Scripts\Stone.cs" />
+    <Compile Include="Assets\Scripts\GameZoom.cs" />
+    <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\EnemyShip.cs" />
+    <Compile Include="Assets\Scripts\EnemyBullet.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

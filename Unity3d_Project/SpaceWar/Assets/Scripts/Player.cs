@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
       rig = GetComponent<Rigidbody>();
 
         fire_point = transform.Find("FirePoint");
-        prefab_bullet = Resources.Load<GameObject>("Bullet");
+        prefab_bullet = Resources.Load<GameObject>("PlayerBullet");
         last_fire_time = Time.time;
     }
 

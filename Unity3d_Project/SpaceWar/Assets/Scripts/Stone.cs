@@ -46,7 +46,7 @@ public class Stone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag!="GameZoom" && other.tag != "Stone")
+        if (other.tag!="GameZoom" && other.tag != "Stone" && other.tag != "Enemy")
         {
             Destroy(this.gameObject);// 销毁被撞到的石头
             Destroy(other.gameObject);// 销毁撞击的子弹 

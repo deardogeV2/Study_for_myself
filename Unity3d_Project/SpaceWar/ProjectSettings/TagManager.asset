@@ -6,6 +6,10 @@ TagManager:
   tags:
   - GameZoom
   - Stone
+  - Bullet
+  - PlayerBullet
+  - EnemyBullet
+  - Enemy
   layers:
   - Default
   - TransparentFX
