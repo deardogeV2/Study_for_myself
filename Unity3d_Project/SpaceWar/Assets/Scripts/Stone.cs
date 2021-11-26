@@ -12,12 +12,12 @@ public class Stone : MonoBehaviour
     Rigidbody rig;
     CapsuleCollider capsuleCollider;
 
-    public GameObject prefabBoomEffect; // ±¬Õ¨Ð§¹û
+    public GameObject prefabBoomEffect; // ï¿½ï¿½Õ¨Ð§ï¿½ï¿½
 
 
     private void Reset()
     {
-        // ×¢Òâ£¡Õâ¸öµØ·½ÊÇ±à¼­Æ÷Ê±ºò»ñÈ¡µÄ¶ÔÏórigÒÔ¼°capsuleCollider£¬ÔÚÔËÐÐÄ£Ê½ÏÂÆäÊµÊÇÃ»ÓÐ»ñÈ¡µÄ£¬´ËÊ±StartÀïÃæµÄrigÒÔ¼°capsuleCollider»¹Ã»ÓÐ±»¸³Öµ£¬ËùÒÔ»á±¬³ö¿ÕÖ¸ÕëÒ»³¡£¬±ØÐëÖØÐÂ»ñÈ¡Ò»´Î¡£
+        // ×¢ï¿½â£¡ï¿½ï¿½ï¿½ï¿½Ø·ï¿½ï¿½Ç±à¼­ï¿½ï¿½Ê±ï¿½ï¿½ï¿½È¡ï¿½Ä¶ï¿½ï¿½ï¿½rigï¿½Ô¼ï¿½capsuleColliderï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£Ê½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½Ã»ï¿½Ð»ï¿½È¡ï¿½Ä£ï¿½ï¿½ï¿½Ê±Startï¿½ï¿½ï¿½ï¿½ï¿½rigï¿½Ô¼ï¿½capsuleColliderï¿½ï¿½Ã»ï¿½Ð±ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½Ô»á±¬ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â»ï¿½È¡Ò»ï¿½Î¡ï¿½
         capsuleCollider = GetComponent<CapsuleCollider>();
         capsuleCollider.isTrigger = true;
 
@@ -46,16 +46,16 @@ public class Stone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag!="GameZoom" && other.tag != "Stone" && other.tag != "Enemy")
+        if (other.tag!="GameZoom" && other.tag != "Stone" && other.tag != "Enemy" && other.tag != "EnemyBullet")
         {
-            Destroy(this.gameObject);// Ïú»Ù±»×²µ½µÄÊ¯Í·
-            Destroy(other.gameObject);// Ïú»Ù×²»÷µÄ×Óµ¯ 
+            Destroy(this.gameObject);// ï¿½ï¿½ï¿½Ù±ï¿½×²ï¿½ï¿½ï¿½ï¿½Ê¯Í·
+            Destroy(other.gameObject);// ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ 
 
-            // Ìí¼Ó±¬Õ¨Ð§¹û
+            // ï¿½ï¿½ï¿½Ó±ï¿½Õ¨Ð§ï¿½ï¿½
             if (prefabBoomEffect)
             {
-                //´´½¨Ò»¸öÁ£×ÓÌØÐ§¶ÔÏó
-                print("¶ÔÏó¼ÓÔØ³É¹¦");
+                //ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½
+                print("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø³É¹ï¿½");
                 GameObject boom = Instantiate(prefabBoomEffect, transform.position, Quaternion.identity);
 
                 Destroy(boom, 1.5f);
