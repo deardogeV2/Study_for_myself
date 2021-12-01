@@ -12,7 +12,7 @@ public class Stone : MonoBehaviour
     Rigidbody rig;
     CapsuleCollider capsuleCollider;
 
-    public GameObject prefabBoomEffect; // ��ըЧ��
+    public GameObject prefabBoomEffect; // 爆炸特效。
 
     //石头分数
     int point;
@@ -30,7 +30,7 @@ public class Stone : MonoBehaviour
 
     private void Reset()
     {
-        // ע�⣡����ط��Ǳ༭��ʱ���ȡ�Ķ���rig�Լ�capsuleCollider��������ģʽ����ʵ��û�л�ȡ�ģ���ʱStart�����rig�Լ�capsuleCollider��û�б���ֵ�����Իᱬ����ָ��һ�����������»�ȡһ�Ρ�
+        //获取陨石本身的Collider,并且将碰撞器选项打开。
         capsuleCollider = GetComponent<CapsuleCollider>();
         capsuleCollider.isTrigger = true;
 

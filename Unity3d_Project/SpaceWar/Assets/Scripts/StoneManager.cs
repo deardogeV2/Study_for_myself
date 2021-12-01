@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class StoneManager : MonoBehaviour
 {
-    GameObject[] prefabGoStones;//Ê¯Í·Ô¤ÖÆÌå×é
-    //public List<GameObject> Stones; // Ê¯Í·×é
+    GameObject[] prefabGoStones;//çŸ³å¤´é¢„åˆ¶ä½“ç»„ï¼Œç”¨ä½œéšæœºç”Ÿæˆä¸åŒæ¨¡å‹çš„çŸ³å¤´
+    //public List<GameObject> Stones; // Ê¯Í·ï¿½ï¿½
 
     float minX = -5f;
     float maxX = 5f;
@@ -15,10 +15,10 @@ public class StoneManager : MonoBehaviour
 
     private float stonePositionGap = 2f;
 
-    public int waveCount = 3; // Ê¯Í·Ò»¹²ÓĞ¶àÉÙ²¨
-    public int pWaveCount = 5; // Ã¿Ò»²¨Ê¯Í·Éú³ÉÊ¯Í·ÊıÁ¿
-    public float deltaTime; // Ê¯Í·Éú³É¼ä¸ô
-    public float deltaWaveTime; // Ã¿Ò»²¨Ê¯Í·µÄ¼ä¸ô
+    public int waveCount = 3; // æ€»çŸ³å¤´æ³¢æ•°
+    public int pWaveCount = 5; // æ¯ä¸€æ³¢çŸ³å¤´çš„æ•°é‡
+    public float deltaTime; // çŸ³å¤´ç”Ÿæˆçš„é—´éš”æ—¶é—´
+    public float deltaWaveTime; // æ¯ä¸€æ³¢é—´éš”æ—¶é—´
 
     private void Awake()
     {
@@ -63,13 +63,13 @@ public class StoneManager : MonoBehaviour
 
             bool tmp_result = true;
 
-            // ÕâÀïÊÇ×öÁËÒ»¸öÊı¾İ·ÀÖ¹Éú³ÉÊ±ÌùµÄÌ«½ü£¬µ«ÒòÎª±¾Éí´´½¨ºóÊ¯Í·»áÒÆ¶¯£¬ËùÒÔºÜÉÙ»áÓĞÊ¯Í·´´½¨Ê±¾Í»á×²µ½Ê¯Í·µÄÂß¼­¡£
+            // è¿™é‡Œæ˜¯æ£€æŸ¥æ–°éšæœºç‚¹ä¸å·²æœ‰çŸ³å¤´ä¹‹é—´çš„è·ç¦»å¤§äºè¦æ±‚å€¼ï¼Œæ„å›¾ç”Ÿæˆæ–°çŸ³å¤´æ—¶ä¸å‡ºç°é‡å ï¼Œä½†æ˜¯å› ä¸ºæœ¬æ¬¡çŸ³å¤´å¼€å§‹å°±æœ‰åˆé€Ÿåº¦è¿›è¡Œç§»åŠ¨æ‰€ä»¥æ²¡å¿…è¦åšæ­¤åˆ¤æ–­
             //foreach (GameObject oneStone in Stones)
             //{
             //    Vector3 old_position = oneStone.transform.position;
             //    Vector3 tmp = new_position - old_position;
 
-            //    if (tmp.magnitude < stonePositionGap) // Èç¹ûÁ½¸öÎ»ÖÃÖ®¼äµÄ¾àÀë£¨.magnitude£©Ğ¡ÓÚ2f
+            //    if (tmp.magnitude < stonePositionGap) // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½Ö®ï¿½ï¿½Ä¾ï¿½ï¿½ë£¨.magnitudeï¿½ï¿½Ğ¡ï¿½ï¿½2f
             //    {
             //        tmp_result = false;
             //        break;
@@ -82,7 +82,7 @@ public class StoneManager : MonoBehaviour
                 new_Stone.transform.SetParent(this.gameObject.transform);
                 new_Stone.transform.position = new_position;
                 new_Stone.GetComponent<Stone>().speed = Random.Range(1f, 5f);
-                // ÕâÀï²»ĞèÒª¶ÔÊ¯Í·½øĞĞÍ³¼Æ¡¢ÒòÎª²»×ö³õÊ¼ÅĞ¶Ï£¬½ÚÔ¼¿Õ¼ä¡£
+                // å› ä¸ºä¸åšçŸ³å¤´æ•´ä½“ç®¡ç†ï¼Œæ‰€ä»¥ä¸éœ€è¦å°†æ¸¸æˆå¯¹è±¡åŠ å…¥æ•°ç»„è¿›è¡Œç®¡ç†
                 //Stones.Add(new_Stone);
                 break;
             }
