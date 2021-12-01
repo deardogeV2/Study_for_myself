@@ -15,19 +15,34 @@ public class EnemyShip : MonoBehaviour
     public float speed = 1f;
     public Vector3 dir = Vector3.back;
     Rigidbody rig;
+
+    //敌人的分数
+    int point;
+    public int Point
+    {
+        get
+        {
+            return point;
+        }
+        set
+        {
+            point = value;
+        }
+    }
     void Start()
     {
         prefab = Resources.Load<GameObject>("EnemyBullet");
         transform_fire_point = transform.Find("FirePoint");
         rig = GetComponent<Rigidbody>();
         rig.useGravity = false;
+
+        rig.velocity = dir * speed;
+        //初始化该敌人分数
+        Point = Random.Range(100, 500);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        rig.velocity = dir * speed;
-
         if (Time.time - last_fire_time > fire_gap)
         {
             GameObject newEnemyBullet = Instantiate<GameObject>(prefab);
@@ -35,15 +50,6 @@ public class EnemyShip : MonoBehaviour
             newEnemyBullet.transform.position = transform_fire_point.position;
 
             last_fire_time = Time.time;
-        }
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-
-        if (other.tag == "PlayerBullet" || other.tag == "Player")
-        {
-            Destroy(other.gameObject);
-            Destroy(this.gameObject);
         }
     }
 }

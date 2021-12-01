@@ -14,6 +14,19 @@ public class Stone : MonoBehaviour
 
     public GameObject prefabBoomEffect; // ��ըЧ��
 
+    //石头分数
+    int point;
+    public int Point
+    {
+        get
+        {
+            return point;
+        }
+        set
+        {
+            point = value;
+        }
+    }
 
     private void Reset()
     {
@@ -36,7 +49,7 @@ public class Stone : MonoBehaviour
     }
     void Start()
     {
-        
+        Point = Random.Range(10, 50);
         speed = Random.Range(5f, 10f);
         dir = Random.insideUnitSphere;
         rig.angularVelocity = dir * angelSpeed;
@@ -44,28 +57,5 @@ public class Stone : MonoBehaviour
         rig.velocity = new Vector3(0, 0, -speed);
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag!="GameZoom" && other.tag != "Stone" && other.tag != "Enemy" && other.tag != "EnemyBullet")
-        {
-            Destroy(this.gameObject);// ���ٱ�ײ����ʯͷ
-            Destroy(other.gameObject);// ����ײ�����ӵ� 
-
-            // ���ӱ�ըЧ��
-            if (prefabBoomEffect)
-            {
-                //����һ��������Ч����
-                print("������سɹ�");
-                GameObject boom = Instantiate(prefabBoomEffect, transform.position, Quaternion.identity);
-
-                Destroy(boom, 1.5f);
-            }
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }

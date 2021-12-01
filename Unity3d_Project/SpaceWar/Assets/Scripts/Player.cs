@@ -21,13 +21,69 @@ public class Player : MonoBehaviour
 
     private float fire_gap = 0.5f;
 
+    //玩家爆炸特效
+    GameObject playerBoomEffect;
+
+    //添加数据
+    const int lifeMax = 5;
+    int curLife;
+    int curPoint;
+
+    public int CurLife {
+        get
+        {
+            return curLife;
+        }
+        set
+        {
+            //数值更新
+            curLife = value;
+            //UI更新
+            GameUI.Instance.updateLife(value);
+        }
+    }
+    public int CurPoint
+    {
+        get
+        {
+            return curPoint;
+        }
+        set
+        {
+            //数值更新
+            curPoint = value;
+            //UI更新
+            GameUI.Instance.updatePoint(value);
+        }
+    }
+
+    static Player instance;
+    public static Player Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     void Start()
     {
-      rig = GetComponent<Rigidbody>();
+        rig = GetComponent<Rigidbody>();
 
         fire_point = transform.Find("FirePoint");
         prefab_bullet = Resources.Load<GameObject>("PlayerBullet");
         last_fire_time = Time.time;
+        playerBoomEffect = Resources.Load<GameObject>("Effect/Explosions/explosion_player");
+
+        //初始化生命值以及分数
+        //注意，这里属性的赋值函数已经被设定，所以才会走到更新的调用，不能直接对于curLife直接进行修改。
+        CurLife = lifeMax;
+        CurPoint = 0;
     }
 
     void FixedUpdate()
@@ -55,6 +111,17 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        //飞船自毁逻辑。写在飞船里面好一点
+        if (CurLife <= 0)
+        {
+            Destroy(this.gameObject);
+            if (playerBoomEffect)
+            {
+                GameObject boom = Instantiate(playerBoomEffect, transform.position, Quaternion.identity);
+                Destroy(boom, 1.5f);
+            }
+        }
+
 
         if (Input.GetKey(KeyCode.Space))
         {

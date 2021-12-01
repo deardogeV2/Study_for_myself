@@ -36,11 +36,6 @@ public class StoneManager : MonoBehaviour
         StartCoroutine(CreatStones());
     }
 
-    void Update()
-    {
-
-    }
-
     IEnumerator CreatStones()
     {
         yield return new WaitForSeconds(deltaWaveTime);

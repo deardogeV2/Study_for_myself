@@ -16,9 +16,17 @@ public class EnemyBullet : MonoBehaviour
         rig.velocity = dir * speed;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.tag == GameDefine.TAG.PLAYER)
+        {
+            //敌人子弹打中玩家，逻辑待添加。
+            Player PlayerScripts = other.GetComponent<Player>();
+            PlayerScripts.CurLife -= 1;
+            print("玩家当前生命值 = " + PlayerScripts.CurLife);
+
+            //敌人子弹自毁逻辑
+            Destroy(this.gameObject);
+        }
     }
 }
