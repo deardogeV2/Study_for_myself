@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour
@@ -120,6 +122,9 @@ public class Player : MonoBehaviour
                 GameObject boom = Instantiate(playerBoomEffect, transform.position, Quaternion.identity);
                 Destroy(boom, 1.5f);
             }
+            //出现失败场景
+            GameUI.Instance.ShowGameFilePanel();
+            
         }
 
 

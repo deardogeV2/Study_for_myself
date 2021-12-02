@@ -8,7 +8,8 @@ public class GameUI : MonoBehaviour
 {
     MainPanel mainPanel;
     GamePanel gamePanel;
-    GameFilePanel gameFilePanel;
+    GameFailPanel gameFilePanel;
+    GameRulesPanel gameRulesPanel;
 
     
     //单例定义。
@@ -44,10 +45,17 @@ public class GameUI : MonoBehaviour
             gamePanel = GamePanelTsf.GetComponent<GamePanel>();
         }
 
-        Transform GameFilePanelTsf = transform.Find("GameFilePanel");
-        if (GameFilePanelTsf)
+        Transform GameFailPanelTsf = transform.Find("GameFailPanel");
+        if (GameFailPanelTsf)
         {
-            gameFilePanel = GameFilePanelTsf.GetComponent<GameFilePanel>();
+            gameFilePanel = GameFailPanelTsf.GetComponent<GameFailPanel>();
+            print("获取到了游戏失败的对象");
+        }
+
+        Transform GameRulesPanelTsf = transform.Find("GameRulesPanel");
+        if (GameRulesPanelTsf)
+        {
+            gameRulesPanel = GameRulesPanelTsf.GetComponent<GameRulesPanel>();
         }
     }
 
@@ -63,6 +71,7 @@ public class GameUI : MonoBehaviour
         mainPanel.gameObject.SetActive(true);
         gamePanel.gameObject.SetActive(false);
         gameFilePanel.gameObject.SetActive(false);
+        gameRulesPanel.gameObject.SetActive(false);
     }
 
     //显示游戏页面UI
@@ -71,14 +80,25 @@ public class GameUI : MonoBehaviour
         mainPanel.gameObject.SetActive(false);
         gamePanel.gameObject.SetActive(true);
         gameFilePanel.gameObject.SetActive(false);
+        gameRulesPanel.gameObject.SetActive(false);
     }
 
-    //显示简介面板UI
+    //显示游戏失败页面
     public void ShowGameFilePanel()
     {
         mainPanel.gameObject.SetActive(false);
         gamePanel.gameObject.SetActive(false);
         gameFilePanel.gameObject.SetActive(true);
+        gameRulesPanel.gameObject.SetActive(false);
+    }
+
+    //显示游戏简介UI
+    public void ShowGameRulesPanel()
+    {
+        mainPanel.gameObject.SetActive(false);
+        gamePanel.gameObject.SetActive(false);
+        gameFilePanel.gameObject.SetActive(false);
+        gameRulesPanel.gameObject.SetActive(true);
     }
 
     public void updateLife(int curLife)

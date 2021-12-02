@@ -56,6 +56,15 @@ public class PlayerBullet : MonoBehaviour
                 //加分
                 Player.Instance.CurPoint += other.transform.GetComponent<EnemyShip>().Point;
 
+                //删除命中的敌机所有的子弹
+                //利用Transform的Find作用域，只查找子对象。甚至不会影响到孙子对象。
+                Transform enemyBulletOne = other.transform.Find("EnemyBullet");
+                while (enemyBulletOne)
+                {
+                    Destroy(enemyBulletOne.gameObject);
+                    enemyBulletOne = other.transform.Find("EnemyBullet");
+                }
+
                 //爆炸逻辑、注意，需要先判断爆炸特效是否加载成功。
                 if (prefabStoneEffect)
                 {
