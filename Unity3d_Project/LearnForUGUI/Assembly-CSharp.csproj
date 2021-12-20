@@ -57,6 +57,18 @@
     <Compile Include="Assets\Script\MiniMapBg.cs" />
     <Compile Include="Assets\Script\ButtonSkill_One.cs" />
     <Compile Include="Assets\Script\CameraForHeadPortrait.cs" />
+    <Compile Include="Assets\Script\Utility\SingletonMono.cs" />
+    <Compile Include="Assets\Script\GameUI.cs" />
+    <Compile Include="Assets\Script\ItemMouse.cs" />
+    <Compile Include="Assets\Script\ItemMsg.cs" />
+    <Compile Include="Assets\Script\Config\ConfigItem.cs" />
+    <Compile Include="Assets\Script\PanelRoleBag\ItemData.cs" />
+    <Compile Include="Assets\Script\PanelRoleBag\PanelRoleBag.cs" />
+    <Compile Include="Assets\Script\Utility\Tools.cs" />
+    <Compile Include="Assets\Script\PanelRoleBag\ItemGrid.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\StreamingAssets\Item.xml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
