@@ -42,7 +42,7 @@ public class MainPanel : MonoBehaviour
 
     public void OnButtonRules()
     {
-        print("点击了开始。");
+        GameUI.Instance.ShowGameRulesPanel();
     }
 
     public void OnButtonExit()
