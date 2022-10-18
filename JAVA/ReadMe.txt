@@ -1,6 +1,13 @@
+学习笔记地址：https://o25ycicvwh.feishu.cn/drive/folder/fldcnqqbVw79DoY5qWo9MxJs00f
+
+2022/10/18：
+1、Mybatis项目中还包含调用本地依赖包中的对象写法，需要关注XML。把dao、domain等进行拆分（主要是模拟企业中通用parent统一管理的XML形式）
+2、这里没有记录不使用SpringBoot的纯Spring项目，因为实际使用情况比较少就没有留项目，但是在我的笔记中可以看到。
+
 2022/10/18：
 1、根据目前的安全测试工作，重新学习JAVA
 2、学习用工程暂时保存在这里
+
 
 2020/11/9：
 1.开始JAVA的从0基础学习。
