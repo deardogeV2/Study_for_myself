@@ -1,0 +1,17 @@
+spring:
+ datasource:
+  url: jdbc:mysql://localhost:3306/db1
+  driver-class-name: com.mysql.cj.jdbc.Driver
+  username: root
+  password: "123"
+  type: com.alibaba.druid.pool.DruidDataSource
+
+mybatis-plus:
+ global-config:
+  db-config:
+   logic-delete-field: isDelete # 代表逻辑删除字段的名称
+   logic-not-delete-value: 0 # 代表没有删除的字段
+   logic-delete-value: 1 # 代表已经删除的字段
+logging:
+ level:
+   com.test.dao: debug
