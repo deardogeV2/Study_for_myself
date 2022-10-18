@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.LearnForDsl_Mysql.dao.HotelDao">
+    <resultMap id="orderMap" type="com.example.LearnForDsl_Mysql.domain.HotelInfo">
+        <result column="star_name" property="starName"/>
+    </resultMap>
+    <select id="selectAll" resultType="com.example.LearnForDsl_Mysql.domain.HotelInfo" resultMap="orderMap">
+        select *
+        from tb_hotel;
+    </select>
+
+    <select id="selectOneById" resultType="com.example.LearnForDsl_Mysql.domain.HotelInfo" resultMap="orderMap">
+        select *
+        from tb_hotel
+        WHERE id = #{id}
+    </select>
+
+    <insert id="insertOne" >
+        insert into tb_hotel(id, name, address, price, score, brand, city, star_name, business, latitude, longitute, pic) select #{id},#{name},#{address},#{price},#{score},#{brand},#{city},#{starName},#{business},#{latitude},#{longitute},#{pic} WHERE #{id} not in (select id from tb_hotel);
+    </insert>
+
+    <update id="updateOne">
+        update tb_hotel
+        <set>
+            <if test="name!=null">
+                name = #{name},
+            </if>
+            <if test="address!=null">
+                address = #{address},
+            </if>
+            <if test="price!=null">
+                price = #{price},
+            </if>
+            <if test="score!=null">
+                score = #{score},
+            </if>
+            <if test="brand!=null">
+                brand = #{brand},
+            </if>
+            <if test="city!=null">
+                city = #{city},
+            </if>
+            <if test="starName!=null">
+                star_name = #{starName},
+            </if>
+            <if test="business!=null">
+                business = #{business},
+            </if>
+            <if test="latitude!=null">
+                latitude = #{latitude},
+            </if>
+            <if test="longitute!=null">
+                longitute = #{longitute},
+            </if>
+            <if test="pic!=null">
+                pic = #{pic}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteOne">
+        delete from tb_hotel where (id = #{id})
+    </delete>
+</mapper>
