@@ -1,0 +1,38 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/db_order
+    username: root
+    password: "123"
+    driver-class-name: com.mysql.jdbc.Driver
+  rabbitmq:
+    host:  # 主机名
+    port: 5672 # 端口
+    virtual-host: / # 虚拟主机名
+    username: zb # 用户名
+    password: 123 # 密码
+    listener:
+      direct:
+        prefetch: 1 # 每次只能获取一条消息，处理完成后才能获取下一个消息。
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+server:
+  port: 8082
+userService: # 要调用的微服务配置名称
+  ribbon:
+    NFLoadBalancerRuleClassName: com.alibaba.cloud.nacos.ribbon.NacosRule
+
+feign:
+  client:
+    config:
+      default:
+        loggerLevel: BASIC # 日志级别
+  httpclient:
+    enabled: true # 开启feign对HttpClient的支持
+    max-connections: 200 # 最大连接数
+    max-connections-per-route: 50  # 每个路径的最大连接数
+
+#eureka: # 注册eureka 客户端服务
+#  client:
+#    service-url:
+#      defaultZone: http://127.0.0.1:10086/eureka

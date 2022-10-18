@@ -1,0 +1,17 @@
+{
+  "groups": [
+    {
+      "name": "pattern",
+      "type": "com.example.WFW_order.domain.orderConfig",
+      "sourceType": "com.example.WFW_order.domain.orderConfig"
+    }
+  ],
+  "properties": [
+    {
+      "name": "pattern.dateformat",
+      "type": "java.lang.String",
+      "sourceType": "com.example.WFW_order.domain.orderConfig"
+    }
+  ],
+  "hints": []
+}

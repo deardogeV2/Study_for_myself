@@ -1,0 +1,10 @@
+server:
+  port: 10086 # ????
+spring:
+  application:
+    name: eurekaServer
+
+ribbon:
+  eager-load:
+    enable: true # 开启饥饿加载
+    clients: orderService #指定对orderService 开启饥饿加载

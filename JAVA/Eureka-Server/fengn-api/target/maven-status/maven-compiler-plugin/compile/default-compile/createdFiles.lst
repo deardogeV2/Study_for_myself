@@ -1,0 +1,3 @@
+com\fengn\test\clients\UserClient.class
+com\fengn\test\config\FeignClientConfiguration.class
+com\fengn\test\domain\User.class

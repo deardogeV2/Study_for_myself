@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.WFW_order.dao.OrderDao">
+    <resultMap id="orderMap" type="com.example.WFW_order.domain.Order">
+        <result column="order_id" property="orderId"/>
+        <result column="item_name" property="itemName"/>
+        <result column="user_id" property="userId"/>
+    </resultMap>
+    <select id="selectAll" resultType="com.example.WFW_order.domain.Order" resultMap="orderMap">
+        select *
+        from tb_order;
+    </select>
+
+    <select id="selectOneByOrderId" resultType="com.example.WFW_order.domain.Order" resultMap="orderMap">
+        select *
+        from tb_order
+        WHERE order_id = #{id}
+    </select>
+</mapper>
