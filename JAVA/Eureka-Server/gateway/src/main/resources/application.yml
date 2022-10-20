@@ -18,4 +18,4 @@ spring:
           predicates:
             - Path=/order/***
       default-filters: # 默认过滤器设置。通过后都会添加下面这个请求头。
-        - AddRequestHeader=Truth, ZBB test head # 添加请求头
+        - AddRequestHeader=origin,gateway # 添加请求头

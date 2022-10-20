@@ -13,6 +13,10 @@ spring:
     listener:
       direct:
         prefetch: 1 # 每次只能获取一条消息，处理完成后才能获取下一个消息。
+  cloud:
+    sentinel:
+      transport:
+        dashboard: localhost:8080 # 配置控制台地址
 mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
@@ -23,6 +27,8 @@ userService: # 要调用的微服务配置名称
     NFLoadBalancerRuleClassName: com.alibaba.cloud.nacos.ribbon.NacosRule
 
 feign:
+  sentinel:
+    enabled: true # 开启feign的sentinel功能
   client:
     config:
       default:
@@ -31,6 +37,7 @@ feign:
     enabled: true # 开启feign对HttpClient的支持
     max-connections: 200 # 最大连接数
     max-connections-per-route: 50  # 每个路径的最大连接数
+
 
 #eureka: # 注册eureka 客户端服务
 #  client:

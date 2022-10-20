@@ -23,4 +23,10 @@ public class orderController {
     public void test(){
         System.out.println(orderService.now());
     }
+
+    @GetMapping("/update")
+    public String updateTest() throws InterruptedException {
+
+        return "Over";
+    }
 }

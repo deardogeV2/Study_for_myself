@@ -16,7 +16,12 @@ public class UserController{
     UserDao userDao;
 
     @GetMapping("/{id}")
-    public User queryById(@PathVariable("id") Integer id){
+    public User queryById(@PathVariable("id") Integer id) throws InterruptedException {
+        if (id == 999){
+            Thread.sleep(5000);
+            return userDao.getOneById(999);
+        }
         return userDao.getOneById(id);
     }
+
 }

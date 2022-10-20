@@ -18,23 +18,6 @@
 
 	<dependencies>
 
-		<!--引入自己写的feign-api依赖-->
-		<dependency>
-			<groupId>cn.example.Eureka-Server</groupId>
-			<artifactId>fengn-api</artifactId>
-			<version>1.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>io.github.openfeign</groupId>
-			<artifactId>feign-httpclient</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-openfeign</artifactId>
-		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -58,16 +41,30 @@
 			<groupId>com.alibaba.cloud</groupId>
 			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
 		</dependency>
-		<!--nacos的配置管理依赖-->
+		<!--feign客户端依赖-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
+		<!--引入HttpClient依赖-->
+		<dependency>
+			<groupId>io.github.openfeign</groupId>
+			<artifactId>feign-httpclient</artifactId>
+		</dependency>
+		<!--引入feign的统一api-->
+		<dependency>
+			<groupId>cn.example.Eureka-Server</groupId>
+			<artifactId>feign-api</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<!--引入sentinel依赖-->
 		<dependency>
 			<groupId>com.alibaba.cloud</groupId>
-			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+			<artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
 		</dependency>
-
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-configuration-processor</artifactId>
-			<optional>true</optional>
+			<groupId>com.alibaba.csp</groupId>
+			<artifactId>sentinel-datasource-nacos</artifactId>
 		</dependency>
 
 	</dependencies>
