@@ -3,14 +3,19 @@ package com.example.LearnForDsl_Mysql;
 import com.alibaba.fastjson.JSON;
 import com.example.LearnForDsl_Mysql.domain.HotelInfo;
 import com.example.LearnForDsl_Mysql.service.HotelServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.UUID;
 
+
+@Slf4j
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class MysqlTest {
@@ -65,10 +70,33 @@ public class MysqlTest {
     }
 
     @Test
-    public void testSimpleQueue(){
-        String queueName = "simple.queue";
-        HotelInfo hotelInfo = hotelService.selectOneById(1);
-        String message = JSON.toJSONString(hotelInfo);
-        rabbitTemplate.convertAndSend(queueName,message);
+    public void sentMsg(){
+        String uuid = UUID.randomUUID().toString();
+        CorrelationData correlationId = new CorrelationData(uuid);
+        rabbitTemplate.convertAndSend("zb.fanout", "","Hello RabbitMQ ~ ", correlationId);
+    }
+
+    @Test
+    public void sentMsg2(){
+        String uuid = UUID.randomUUID().toString();
+        CorrelationData correlationId = new CorrelationData(uuid);
+        // 设置一个不存在的exchange 测试失败情况
+        rabbitTemplate.convertAndSend("abc", "helloRabbitMQ","Hello RabbitMQ ~ ", correlationId);
+    }
+
+    @Test
+    public void sentMsg3(){
+        String uuid = UUID.randomUUID().toString();
+        CorrelationData correlationId = new CorrelationData(uuid);
+        // 设置一个不存在的routingkey 测试失败情况
+        rabbitTemplate.convertAndSend("", "helloRabbitMQ1", "Hello RabbitMQ ~ ", correlationId);
+    }
+
+    @Test
+    public void testSentToExchange(){
+        String exchangeName = "amq.direct";
+        String message = "hello,every one!";
+
+        rabbitTemplate.convertAndSend(exchangeName,"",message);
     }
 }

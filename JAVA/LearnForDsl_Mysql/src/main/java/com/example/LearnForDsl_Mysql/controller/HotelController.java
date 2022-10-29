@@ -3,6 +3,8 @@ package com.example.LearnForDsl_Mysql.controller;
 import com.alibaba.fastjson.JSON;
 import com.example.LearnForDsl_Mysql.domain.HotelInfo;
 import com.example.LearnForDsl_Mysql.service.HotelServiceImpl;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Nullable;
+import java.util.UUID;
+
+@Slf4j
 @RestController
 @RequestMapping("hotel")
 public class HotelController {
@@ -54,6 +60,31 @@ public class HotelController {
         System.out.println("发送已完成");
 
         return 1;
+    }
+
+    @GetMapping("/TestReturn")
+    public String testReturn(){
+        String exchange = "zb.fanout";
+        HotelInfo hotelInfo = hotelService.selectOneById(1);
+        String message = JSON.toJSONString(hotelInfo);
+
+        // 新建一个correlationData 并且给与一个随机的UUID号
+        CorrelationData correlationData = new CorrelationData((UUID.randomUUID().toString()));
+        correlationData.getFuture().addCallback(result -> { // 定义发送成功（不管返回成不成功）的回调函数
+                    log.info("发送成功");
+                    if (result.isAck()){
+                        // ack消息成功
+                        log.info("消息发送成功,ID：{}",correlationData.getId());
+                    }else {
+                        //消息发送失败
+                        log.info("消息发送失败，ID：{}\n原因：{}",correlationData.getId(),result.getReason());
+                    }
+                },
+                ex -> {
+            log.info("消息发送失败，ID：{}\n原因：{}",correlationData.getId(),ex.getMessage());}
+        );
+        rabbitTemplate.convertAndSend(exchange,"fanout.key",message,correlationData);
+        return "OVER";
     }
 
 }

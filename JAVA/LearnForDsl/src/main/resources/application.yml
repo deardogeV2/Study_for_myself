@@ -1,15 +1,21 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/db1
+    url: jdbc:mysql://localhost:3306/db1?characterEncoding=utf8
     username: root
     password: "123"
     driver-class-name: com.mysql.jdbc.Driver
+
   rabbitmq:
     host: 127.0.0.1 # 默认本机
     port: 5672
     virtual-host: /
-    username: zb
-    password: 123
-
+    username: guest
+    password: guest
+    publisher-returns: true # 开启确认return返回，同样基于callback机制。不过定义为ReturnCallback
+    template:
+      mandatory: true #定义消息路由失败时的策略，true-则调用ReturnCallback；false-则直接丢弃信息
+    publisher-confirm-type: correlated # 开启确认消息返回confirm，这里支持两种 simple-同步等待confirm结果，correlated-异步回调，MQ返回结果时会回调这个ConfirmCallBack
+  application:
+    name: LearnForDSLApplication
 server:
   port: 12580
