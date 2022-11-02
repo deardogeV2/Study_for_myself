@@ -1,5 +1,8 @@
 学习笔记地址：https://o25ycicvwh.feishu.cn/drive/folder/fldcnqqbVw79DoY5qWo9MxJs00f
 
+2022/11/2:
+1、添加了Apollo配置中心和Zookeeper分布式锁的测试代码。相关笔记也更新在笔记地址里面了。
+
 2022/10/29：
 1、添加了MQ的消息确认机制以及 死信交换机 。通过confirm和return方法可以做到 重发等兜底操作。
 
