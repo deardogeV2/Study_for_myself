@@ -4,14 +4,14 @@ server:
 dubbo:
   application:
     name: Provide
-  registry:
+  registry:  #注册中心配置，用于配置连接注册中心相关信息。我们就写个地址就行。
     address: zookeeper://127.0.0.1:2181
-  protocol:
-    name: dubbo
-    port: 20880
-  scan:
-    base-packages: com.example.LearnForDubbo.provider.server
-  config-center:
+  protocol: #协议配置，用于配置提供服务的协议信息，协议由提供方指定，消费方被动接受。
+    name: dubbo # 协议名称
+    port: 20880 # dubbo访问端口
+  scan:  # Dubbo 扫描路径
+    base-packages: com.example.LearnForDubbo.provider.server #服务暴露与发现消费所在的package
+  config-center: # Dubbo的配置中心地址 - 这里默认是是Zookeeper的配置中心，当然也可以用Apollo配置中心，或者Nacos。具体看Dubbo适配不适配。
     address: zookeeper://127.0.0.1:2181
-  metadata-report:
+  metadata-report: # Dubbo的元数据 ,这里也不大关注。
     address: zookeeper://127.0.0.1:2181

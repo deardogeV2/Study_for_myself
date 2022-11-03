@@ -9,7 +9,9 @@ import service.providerServerRPC;
 @RestController
 public class controller {
 
-    @DubboReference
+//    @DubboReference
+    @Autowired // 如果你要使用这个注解，你得自己把providerServerRPC 声明为一个Bean。
+    // 而且注解开发不好声明这个bean所以最好是声明在配置XML中
     private providerServerRPC providerServer;
 
     @GetMapping("/controller")
